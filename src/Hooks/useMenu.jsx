@@ -7,7 +7,6 @@ const useMenu = () => {
     fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMenus(data);
         setLoading(false);
       });
