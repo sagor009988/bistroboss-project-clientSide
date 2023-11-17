@@ -8,7 +8,9 @@ import useCart from "../Hooks/useCart";
 
 const Navbar = () => {
   const [data]=useCart()
+  
   const { user, logout } = useContext(AuthContext);
+ 
   const handleLogOut = () => {
     logout()
       .then((result) => {
@@ -31,13 +33,16 @@ const Navbar = () => {
         <NavLink to={"/myOrder"}>My Order</NavLink>
       </li>
       <li>
-        <NavLink to={"/"}><FaShoppingCart /><p className="text-white bg-red-600 p-1 rounded-lg">{data?.length}</p></NavLink>
+        <NavLink to={"/dashBoard/cart"}><FaShoppingCart /><p className="text-white bg-red-600 p-1 rounded-lg">{data?.length}</p></NavLink>
       </li>
 
       
 
       {user ? (
         <>
+        <li>
+          <p>{user.displayName}</p>
+        </li>
           <li>
             <button onClick={handleLogOut}>LogOut</button>
           </li>

@@ -9,10 +9,18 @@ import OrderTabShare from "./OrderTabShare";
 import { useParams } from "react-router-dom";
 
 const OrderFood = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+  const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+   
     const [menus] = useMenu();
     const {category}=useParams()
+    const initialIndex = categories.indexOf(category);
+    const [tabIndex, setTabIndex] = useState(initialIndex);
     console.log(category);
+    // const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+    // const { category } = useParams();
+    // const initialIndex = categories.indexOf(category);
+    // const [tabIndex, setTabIndex] = useState(initialIndex);
+    // const [menu] = useMenu();
    
   const offer = menus.filter((item) => item.category == "offered");
   const desserts = menus.filter((item) => item.category == "dessert");
@@ -25,7 +33,8 @@ const OrderFood = () => {
   return (
     <div className="">
       <Cover img={order} title="Food Order"></Cover>
-      <Tabs className="mt-5 mb-2" selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+      {/* <Tabs className="mt-5 mb-2" selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}> */}
+      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
       
         <TabList>
           <Tab>Salad</Tab>

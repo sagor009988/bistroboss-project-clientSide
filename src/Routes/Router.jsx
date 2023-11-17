@@ -7,6 +7,10 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyOrder from "../Pages/MyOrder/MyOrder";
+import DashBoard from "../Layout/DashBoard/DashBoard";
+import Cart from "../Pages/DashBoard/Cart/Cart";
+import AllUsers from "../Pages/DashBoard/AllUsers";
+
 
 const router=createBrowserRouter([
     {
@@ -37,6 +41,22 @@ const router=createBrowserRouter([
                 path:'/myOrder',
                 element:<PrivateRoute><MyOrder></MyOrder></PrivateRoute>
             }
+        ]
+    },
+    {
+        path:'dashBoard',
+        element:<DashBoard></DashBoard>,
+        children:[
+            {
+                path:'/dashBoard/cart',
+                element:<PrivateRoute><Cart></Cart></PrivateRoute>
+            },
+            //
+            {
+                path:'/dashBoard/allUsers',
+                element:<AllUsers></AllUsers>
+            } 
+
         ]
     }
 ])

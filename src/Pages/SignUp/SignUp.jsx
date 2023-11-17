@@ -3,32 +3,47 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import GoogleSignIn from "../../Components/GoogleSignIn";
+
 
 const SignUp = () => {
+  const axiosPublic=useAxiosPublic()
   const navigate=useNavigate()
     const {createUser,updateProfileInfo,logOut}=useContext(AuthContext)
     const {register,handleSubmit,reset,formState: { errors },} = useForm()
       const onSubmit= (data) =>{
         createUser(data.email,data.password)
         .then(result=>{
-            console.log(result.user);
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "SignUp successFull",
-              showConfirmButton: false,
-              timer: 1500
-            });
-            updateProfileInfo(data.name,data.photoUrl)
-            .then(result=>{
-              console.log(result.user);
-              logOut()
-           .then(result=>console.log(result.user))
-           .catch(errors)
+          updateProfileInfo(data.name,data.photoUrl)
+            .then(()=>{
+              // create user data send to data base
+
+              const userinfo={
+                name:data.name,
+                email:data.email
+              }
+              axiosPublic.post('/users',userinfo)
+              .then(res=>{
+                if(res.data.insertedId){
+                  console.log('users');
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "SignUp successFull",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  navigate('/')
+                }
+              })
+              
+              
            
             })
             .catch(error=>console.log(error.message))
-            navigate('/login')
+           
+            
         })
         .catch(reeor=>alert(reeor.message))}
   
@@ -107,15 +122,20 @@ const SignUp = () => {
                 <button className="btn btn-primary">SignUp</button>
               </div>
               <p>
-                Have an account ?please{" "}
+                Have an account ?please
                 <Link
-                  to="/login"
+                  to="/"
                   className="text-2xl font-semibold text-blue-700"
                 >
                   login
                 </Link>
               </p>
+              <div className="divider divide-black">OR</div>
+              
             </form>
+            <div className="pb-6 px-6">
+            <GoogleSignIn></GoogleSignIn>
+            </div>
           </div>
         </div>
       </div>

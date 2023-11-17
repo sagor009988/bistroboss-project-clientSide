@@ -4,12 +4,15 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
+import GoogleSignIn from '../../Components/GoogleSignIn';
+
 
 const Login = () => {
 
   const location=useLocation()
   const navigate=useNavigate()
   const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
     const {loginUser}=useContext(AuthContext)
     const captchaRef=useRef(null)
@@ -40,6 +43,7 @@ const Login = () => {
             console.log(error.messsage);
             
         })
+        
     }
     const handleCaptcha=()=>{
         const value=captchaRef.current.value;
@@ -119,6 +123,8 @@ const Login = () => {
               <button disabled={false} className="btn btn-primary">Login</button>
             </div>
          <p>New here?please <Link to="/signUp" className='text-2xl font-semibold text-blue-700'>Signup</Link></p>
+         <div className="divider divide-black">OR</div>
+         <GoogleSignIn></GoogleSignIn>
           </form>
          
         </div>
