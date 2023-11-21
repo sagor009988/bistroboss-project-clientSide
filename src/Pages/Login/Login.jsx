@@ -124,9 +124,9 @@ const Login = () => {
             </div>
          <p>New here?please <Link to="/signUp" className='text-2xl font-semibold text-blue-700'>Signup</Link></p>
          <div className="divider divide-black">OR</div>
-         <GoogleSignIn></GoogleSignIn>
+        
           </form>
-         
+          <GoogleSignIn></GoogleSignIn>
         </div>
         
       </div>

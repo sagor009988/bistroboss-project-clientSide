@@ -10,7 +10,7 @@ import GoogleSignIn from "../../Components/GoogleSignIn";
 const SignUp = () => {
   const axiosPublic=useAxiosPublic()
   const navigate=useNavigate()
-    const {createUser,updateProfileInfo,logOut}=useContext(AuthContext)
+    const {createUser,updateProfileInfo}=useContext(AuthContext)
     const {register,handleSubmit,reset,formState: { errors },} = useForm()
       const onSubmit= (data) =>{
         createUser(data.email,data.password)

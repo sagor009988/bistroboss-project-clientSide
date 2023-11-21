@@ -17,10 +17,11 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const DashBoard = () => {
   // TODO=get isAdmin value from the data base
-  const isAdmin = true;
+  const [isAdmin ]=useAdmin()
 
   const [cart] = useCart();
   return (
